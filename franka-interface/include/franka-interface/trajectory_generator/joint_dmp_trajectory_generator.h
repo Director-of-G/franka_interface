@@ -2,6 +2,8 @@
 #define FRANKA_INTERFACE_TRAJECTORY_GENERATOR_JOINT_DMP_TRAJECTORY_GENERATOR_H_
 
 #include "franka-interface/trajectory_generator/joint_trajectory_generator.h"
+#include <fstream>
+#include <iostream>
 
 class JointDmpTrajectoryGenerator : public JointTrajectoryGenerator {
  public:
@@ -16,6 +18,7 @@ class JointDmpTrajectoryGenerator : public JointTrajectoryGenerator {
 
   std::array<double, 7> y_={};
   std::array<double, 7> dy_={};
+  std::array<double, 7> ddy_={};
 
  private:
   JointDMPTrajectoryGeneratorMessage joint_dmp_trajectory_params_;
@@ -28,10 +31,28 @@ class JointDmpTrajectoryGenerator : public JointTrajectoryGenerator {
   int num_basis_=42;
   int num_dims_=7;
   int num_sensor_values_=10;
+
+  /*
+    Modified by IRM lab
+    Modification: 2022/04/14
+  */
+  double alpha_y_ = 60.0;
+  double beta_y_ = 60.0/4.0;
+  double alpha_x_ = 1.0;
+
   std::array<double, 42> basis_mean_{};
   std::array<double, 42> basis_std_{};
+
   std::array<std::array<std::array<double, 42>, 10>, 7> weights_{};
+  std::array<std::array<double, 42>, 7> my_weights_{};
+
   std::array<double, 10> initial_sensor_values_{{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0}};
+  std::array<double, 7> my_goal_{{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0}};
+  std::ofstream joints_memory_file;
+  
+  // std::vector<std::array<double, 7>> joints_memory;
+  int run_cnt =0;
+
   std::array<double, 7> y0_={};
 
   void getInitialMeanAndStd();
