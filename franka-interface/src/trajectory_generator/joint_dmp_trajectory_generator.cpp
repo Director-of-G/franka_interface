@@ -170,7 +170,7 @@ void JointDmpTrajectoryGenerator::parse_parameters() {
     for (int i = 0; i < num_dims_; i++) {
       my_goal_[i] = joint_dmp_trajectory_params_.initial_sensor_values(i);
     }
-    joints_memory_file.open("/home/roboticslab/yxj/frankapy/cfg/joints_memory.txt");
+    joints_memory_file.open("/home/roboticslab/yxj/frankapy/data/0415/joints_memory.txt");
   } else {
     std::cout << "[Joint DMP]Parsing JointDMPTrajectoryGenerator params failed. Data size = " << data_size << std::endl;
   }
@@ -195,7 +195,8 @@ void JointDmpTrajectoryGenerator::get_next_step(const franka::RobotState &robot_
   static std::array<double, 42> psi_current{};
 
   // calculate basis function values at current timestep
-  dx = -tau_ * alpha_x_ * x_ * 0.00246;  // CS needs dt=0.01
+  // dx = -tau_ * alpha_x_ * x_ * 0.00246;   // CS needs dt=0.01
+  dx = -tau_ * alpha_x_ * x_ * 0.01;
   x_ = x_ + dx;
 
   double psi_current_sum = 0;
