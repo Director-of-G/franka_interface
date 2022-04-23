@@ -64,6 +64,8 @@ TrajectoryGenerator* TrajectoryGeneratorFactory::getTrajectoryGeneratorForSkill(
       trajectory_generator_type_name = "JointDmpTrajectoryGenerator";
       trajectory_generator = new JointDmpTrajectoryGenerator(buffer, sensor_data_manager);
       break;
+
+    //TODO
     case TrajectoryGeneratorType::LinearForcePositionTrajectoryGenerator:
       trajectory_generator_type_name = "LinearForcePositionTrajectoryGenerator";
       trajectory_generator = new LinearForcePositionTrajectoryGenerator(buffer, sensor_data_manager);

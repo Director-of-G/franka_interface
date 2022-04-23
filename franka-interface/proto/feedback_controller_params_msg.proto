@@ -30,3 +30,9 @@ message ForcePositionFeedbackControllerMessage {
   repeated double selection = 5;
   required bool use_cartesian_gains = 6;
 }
+
+// added by yxj 20220422
+message MyCartesianVelocityFeedbackControllerMessage {
+    repeated double k_gains = 1;
+    repeated double d_gains = 2;
+}

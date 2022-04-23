@@ -45,6 +45,8 @@ message JointDMPTrajectoryGeneratorMessage {
   repeated double initial_sensor_values = 10;
 }
 
+//TODO
+
 message PoseDMPTrajectoryGeneratorMessage {
   required bool orientation_only = 1;
   required bool position_only = 2;
