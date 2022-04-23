@@ -45,6 +45,7 @@ add_library(franka-interface SHARED
   src/skills/impedance_control_skill.cpp
   src/skills/joint_position_continuous_skill.cpp
   src/skills/joint_position_skill.cpp
+  src/skills/my_joint_velocity_skill.cpp
   src/termination_handler/contact_termination_handler.cpp
   src/termination_handler/final_joint_termination_handler.cpp
   src/termination_handler/final_pose_termination_handler.cpp
@@ -76,6 +77,7 @@ add_library(franka-interface SHARED
   src/trajectory_generator/sine_pose_trajectory_generator.cpp
   src/trajectory_generator/stay_in_initial_joints_trajectory_generator.cpp
   src/trajectory_generator/stay_in_initial_pose_trajectory_generator.cpp
+  src/trajectory_generator/my_joint_velocity_generator.cpp
   src/duration.cpp
   src/feedback_controller_factory.cpp
   src/file_stream_logger.cpp

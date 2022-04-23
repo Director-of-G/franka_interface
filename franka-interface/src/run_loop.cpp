@@ -28,6 +28,9 @@
 #include "franka-interface/skills/joint_position_skill.h"
 #include "franka-interface/utils/logger_utils.h"
 
+// my
+#include "franka-interface/skills/my_joint_velocity_skill.h"
+
 std::atomic<bool> run_loop::run_loop_ok_{false};
 std::mutex run_loop::robot_access_mutex_;
 
@@ -254,6 +257,10 @@ void run_loop::update_process_info() {
             case SkillType::JointPositionSkill:
               skill_type_name = "JointPositionSkill";
               new_skill = new JointPositionSkill(new_skill_id, new_meta_skill_id, new_skill_description);
+              break;
+            case SkillType::MyJointVelocitySkill:
+              skill_type_name = "MyJointVelocitySkill";
+              new_skill = new MyJointVelocitySkill(new_skill_id, new_meta_skill_id, new_skill_description);
               break;
             default:
               std::cout << "Incorrect skill type: " << 

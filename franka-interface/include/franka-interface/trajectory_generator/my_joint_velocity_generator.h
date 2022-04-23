@@ -43,12 +43,15 @@ class MyJointVelocityGenerator : public TrajectoryGenerator {
 
  protected:
   JointTrajectoryGeneratorMessage joint_trajectory_params_;
+  JointPositionVelocitySensorMessage joint_vels_sensor_msg_;
+  void parse_sensor_data(const franka::RobotState &robot_state) override;
+  void get_next_step(const franka::RobotState &robot_state) override;
 
   std::array<double, 7> initial_joints_{};
-  std::array<double, 7> desired_joints_{};
+  std::array<double, 7> desired_joint_vels_{};
   std::array<double, 7> goal_joints_{};
   std::array<double, 7> last_goal_joints_{};
-  const double dqi_limit = 0.15
+  const double dqi_limit = 0.15;
 };
 
 #endif	// FRANKA_INTERFACE_TRAJECTORY_GENERATOR_MY_JOINT_VELOCITY_GENERATOR_H_
