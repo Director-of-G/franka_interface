@@ -32,6 +32,8 @@
 #include "franka-interface/trajectory_generator/stay_in_initial_joints_trajectory_generator.h"
 #include "franka-interface/trajectory_generator/stay_in_initial_pose_trajectory_generator.h"
 
+#include "franka-interface/trajectory_generator/my_joint_velocity_generator.h"
+
 TrajectoryGenerator* TrajectoryGeneratorFactory::getTrajectoryGeneratorForSkill(
     SharedBufferTypePtr buffer, SensorDataManager* sensor_data_manager) {
   TrajectoryGeneratorType trajectory_generator_type = static_cast<TrajectoryGeneratorType>(buffer[0]);
@@ -65,7 +67,12 @@ TrajectoryGenerator* TrajectoryGeneratorFactory::getTrajectoryGeneratorForSkill(
       trajectory_generator = new JointDmpTrajectoryGenerator(buffer, sensor_data_manager);
       break;
 
-    //TODO
+    //TODO  //DONE
+    case TrajectoryGeneratorType::MyJointVelocityGenerator:
+      trajectory_generator_type_name = "MyJointVelocityGenerator";
+      trajectory_generator = new MyJointVelocityGenerator(buffer, sensor_data_manager);
+      break;
+    
     case TrajectoryGeneratorType::LinearForcePositionTrajectoryGenerator:
       trajectory_generator_type_name = "LinearForcePositionTrajectoryGenerator";
       trajectory_generator = new LinearForcePositionTrajectoryGenerator(buffer, sensor_data_manager);
